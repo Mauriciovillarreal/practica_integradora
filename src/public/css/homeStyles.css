@@ -1,6 +1,7 @@
 main {
     padding: 5px;
     box-sizing: border-box;
+    font-family:monospace
 }
 
 .main {
@@ -21,8 +22,13 @@ h1 {
 
 }
 
-ul {
+#products-list {
     display: grid;
     grid-template-columns: 25% 25% 25% 25%;
     text-align: center;
+}
+
+#messages {
+    border: 1px solid rgb(0, 0, 0);
+    height: 200px;
 }

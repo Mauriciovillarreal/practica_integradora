@@ -59,11 +59,24 @@ io.on('connection', async (socket) => {
     });
 
     socket.on('chat message', async (msg) => {
-        console.log('message: ' + msg);
-        const newMessage = new chatsModel({ message: msg });
-        await newMessage.save();
-        io.emit('chat message', msg);
-    });
+
+        console.log('message:', msg);
+    
+        try {
+    
+          const newMessage = new chatsModel({ email: msg.user, message: msg.message });
+    
+          await newMessage.save();
+    
+          io.emit('chat message', msg);
+    
+        } catch (error) {
+    
+          console.error('Error occurred while saving message:', error);
+    
+        }
+    
+      });
 });
 
 app.use('/', require('./routes/views.routes'))

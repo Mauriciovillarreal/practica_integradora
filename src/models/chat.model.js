@@ -3,6 +3,7 @@ const { Schema, model } = require('mongoose');
 const chatsSchema = new Schema ({
     email: {
         type: String,
+        required: true
     },
     message: String,
     timestamp: {

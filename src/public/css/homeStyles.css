@@ -1,0 +1,28 @@
+main {
+    padding: 5px;
+    box-sizing: border-box;
+}
+
+.main {
+    display: grid;
+    grid-template-columns: 70% 30%;
+}
+h1 {
+    color: red
+}
+
+#products-list li {
+    width: 200px;
+    height: 200px;
+    border: 1px solid black;
+    text-align: center;
+    display: grid;
+    border-radius: 15px;
+
+}
+
+ul {
+    display: grid;
+    grid-template-columns: 25% 25% 25% 25%;
+    text-align: center;
+}

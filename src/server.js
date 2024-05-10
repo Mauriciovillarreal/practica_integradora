@@ -26,58 +26,49 @@ app.set('views', path.join(__dirname, '../src/views'))
 app.set('view engine', 'handlebars')
 
 io.on('connection', async (socket) => {
-    console.log('New user connected');
+    console.log('New user connected')
     try {
-        const products = await productsModel.find({});
-        socket.emit('update-products', products);
+        const products = await productsModel.find({})
+        socket.emit('update-products', products)
     } catch (error) {
-        console.error('Error occurred while fetching products:', error);
+        console.error('Error occurred while fetching products:', error)
     }
 
     socket.on('add-product', async (product) => {
         try {
-            const newProduct = await productsModel.create(product);
+            const newProduct = await productsModel.create(product)
             const updatedProducts = await productsModel.find({})
             io.emit('update-products', updatedProducts)
         } catch (error) {
-            console.error('Error occurred while adding product:', error);
+            console.error('Error occurred while adding product:', error)
         }
     });
 
     socket.on('delete-product', async (productId) => {
         try {
             await productsModel.findByIdAndDelete(productId);
-            const updatedProducts = await productsModel.find({});
-            io.emit('update-products', updatedProducts);
+            const updatedProducts = await productsModel.find({})
+            io.emit('update-products', updatedProducts)
         } catch (error) {
-            console.error('Error occurred while deleting product:', error);
+            console.error('Error occurred while deleting product:', error)
         }
-    });
+    })
 
     socket.on('disconnect', () => {
         console.log('User disconnected');
-    });
+    })
 
     socket.on('chat message', async (msg) => {
-
-        console.log('message:', msg);
-    
+        console.log('message:', msg)
         try {
-    
-          const newMessage = new chatsModel({ email: msg.user, message: msg.message });
-    
-          await newMessage.save();
-    
-          io.emit('chat message', msg);
-    
+          const newMessage = new chatsModel({ email: msg.user, message: msg.message })
+          await newMessage.save()
+          io.emit('chat message', msg)
         } catch (error) {
-    
-          console.error('Error occurred while saving message:', error);
-    
+          console.error('Error occurred while saving message:', error)
         }
-    
-      });
-});
+      })
+})
 
 app.use('/', require('./routes/views.routes'))
 app.use('/api/products', require('../src/routes/api/products.route.js'))

@@ -9,7 +9,7 @@ main {
     grid-template-columns: 70% 30%;
 }
 h1 {
-    color: red
+    color: rgb(121, 64, 0)
 }
 
 #products-list li {

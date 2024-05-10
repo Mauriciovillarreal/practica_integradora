@@ -35,9 +35,9 @@ router.get('/chat', async (req, res) => {
     try {
         const messages = await chatsModel.find({});
         res.render('chat', {
-             messages,
-             styles: 'homeStyles.css'
-             });
+            messages,
+            styles: 'homeStyles.css'
+        });
     } catch (error) {
         console.error("Error occurred while fetching messages:", error);
         res.status(500).send("Internal server error");
